@@ -155,7 +155,9 @@ func Login(c *gin.Context) {
 	var userFromDB models.User
 	err := models.GetUsertb().Where("email = ?", loginUser.Email).First(&userFromDB).Error
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "อีเมลนี้ยังไม่มีในระบบ"})
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "อีเมลนี้ยังไม่มีในระบบ",
+		})
 		return
 	}
 
