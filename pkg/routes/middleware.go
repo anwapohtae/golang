@@ -11,36 +11,35 @@ import (
 func verifyToken(c *gin.Context) {
 	authHeader := c.GetHeader("Authorization")
 	if authHeader == "" {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "authHeader = Unauthorized request")
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "Authorization = Unauthorized request")
 		return
 	}
 
-	tokenString := strings.Split(authHeader, " ")[1]
-	// log.Fatal(tokenString)
-	if tokenString == "null" {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "tokenString = Unauthorized request")
+	auth := strings.Split(authHeader, " ")
+	if len(auth) < 2 {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "Token is missing in Authorization header")
 		return
 	}
+
+	tokenString := auth[1] // ใช้ index 1 เพื่อรับค่า token หลังช่องว่าง
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		return []byte("your-256-bit-secret"), nil // replace "secretKey" with your secret key
+		return []byte("your-256-bit-secret"), nil // ใส่ "your-256-bit-secret" ด้วย secret key ของคุณ
 	})
-	// log.Println(token)
 	if err != nil || !token.Valid {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "token = Unauthorized request")
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid or expired token")
 		return
 	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
-	// log.Println(claims)
 	if !ok {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "claims = Unauthorized request")
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid token claims")
 		return
 	}
 
 	emailUser, ok := claims["email"].(string)
 	if !ok {
-		c.AbortWithStatusJSON(http.StatusUnauthorized, "emailUser = Unauthorized request")
+		c.AbortWithStatusJSON(http.StatusUnauthorized, "Invalid email in token claims")
 		return
 	}
 

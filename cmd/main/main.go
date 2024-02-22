@@ -39,8 +39,9 @@ func main() {
 	// 	// หลังจากที่ตรวจสอบ Token เรียบร้อยแล้ว คุณสามารถเรียก c.Next() เพื่อให้เดินต่อไปยัง Middleware หรือเส้นทางถัดไปได้
 	// })
 
-	routes.RegisterBookStoreRoutes(r)
-	routes.RegisterUserRoutes(r)
+	routes.AuthRoutes(r)
+	routes.BookRoutes(r)
+	routes.UserRoutes(r)
 
 	port := "8080"
 	log.Printf("Server is running at http://localhost:%s\n", port)
