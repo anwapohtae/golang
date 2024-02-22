@@ -10,16 +10,20 @@ var usertb *gorm.DB
 
 type User struct {
 	gorm.Model
-	Firstname       string `json:"firstname"`
-	Lastname        string `json:"lastname"`
+	Firstname        string `json:"firstname"`
+	Lastname         string `json:"lastname"`
 	Googlefirstsname string `json:"googlefirstsname"`
-	Googlelastname  string `json:"googlelastname"`
-	Age             string `json:"age"`
-	Numberphone     string `json:"numberphone"`
-	Googleid        string `json:"googleid"`
-	Email           string `json:"email"`
-	Profile         string `json:"profile"`
-	Role            string `json:"role"`
+	Googlelastname   string `json:"googlelastname"`
+	Age              string `json:"age"`
+	Numberphone      string `json:"numberphone"`
+	Googleid         string `json:"googleid"`
+	Email            string `json:"email"`
+	Profile          string `json:"profile"`
+	Province         string `json:"province"`
+	Amphure          string `json:"amphure"`
+	Tambon           string `json:"tambon"`
+	Zipcode          string `json:"zipcode"`
+	Role             string `json:"role"`
 }
 
 func init() {
@@ -61,7 +65,6 @@ func GetUserByEmail(email string) (*User, error) {
 	}
 	return &user, nil
 }
-
 
 func DeleteUser(ID int64) User {
 	var user User

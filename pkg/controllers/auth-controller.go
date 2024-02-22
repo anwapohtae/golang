@@ -9,8 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
-
 func Register(c *gin.Context) {
 	var createUser models.User
 	if err := c.ShouldBindJSON(&createUser); err != nil {
@@ -105,6 +103,10 @@ func Login(c *gin.Context) {
 			"email":            userFromDB.Email,
 			"profile":          userFromDB.Profile,
 			"role":             userFromDB.Role,
+			"privince":         userFromDB.Province,
+			"amphure":          userFromDB.Amphure,
+			"tambon":           userFromDB.Tambon,
+			"zipcode":          userFromDB.Zipcode,
 			"exp":              time.Now().Add(time.Hour * 24).Unix(), // กำหนดวันหมดอายุของ Token เป็น 24 ชั่วโมง
 		}
 

@@ -42,6 +42,7 @@ func main() {
 	routes.AuthRoutes(r)
 	routes.BookRoutes(r)
 	routes.UserRoutes(r)
+	routes.ThaidataRoutes(r)
 
 	port := "8080"
 	log.Printf("Server is running at http://localhost:%s\n", port)
