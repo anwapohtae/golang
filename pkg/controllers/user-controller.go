@@ -2,11 +2,14 @@ package controllers
 
 import (
 	"api/pkg/models"
+	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
+
+
 
 func GetUser(c *gin.Context) {
 	newUsers := models.GetAllUser()
@@ -71,9 +74,20 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
+	// อ่าน request ที่ถูกส่งมา
+	req := c.Request
+
+	// ตรวจสอบข้อมูลของ request
+	log.Println("Method:", req.Method)
+	log.Println("URL:", req.URL.String())
+	log.Println("Headers:", req.Header)
+	log.Println("Body:", updateUser) // แสดงข้อมูลที่ถูกส่งมา
+
+	// c.JSON(req.Header)
+
 	userDetails, err := models.GetUserById(ID)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Book not found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
 		return
 	}
 
@@ -113,7 +127,25 @@ func UpdateUser(c *gin.Context) {
 		userDetails.Profile = updateUser.Profile
 	}
 
-	models.GetDB().Save(&userDetails)
+	if updateUser.Province != "" {
+		userDetails.Province = updateUser.Province
+	}
+	
+	if updateUser.Amphure != "" {
+		userDetails.Amphure = updateUser.Amphure
+	}
+	
+	if updateUser.Tambon != "" {
+		userDetails.Tambon = updateUser.Tambon
+	}
+	
+	if updateUser.Zipcode != "" {
+		userDetails.Zipcode = updateUser.Zipcode
+	}
+
+	
+	models.GetUsertb().Save(&userDetails)
+	log.Println(userDetails)
 	c.JSON(http.StatusOK, userDetails)
 
 }

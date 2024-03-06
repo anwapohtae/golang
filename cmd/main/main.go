@@ -16,11 +16,11 @@ func main() {
 	// CORS middleware
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},   
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Bearer "}, // เพิ่ม "Authorization" ที่นี่
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
-	}))	
+	}))
 
 	// // Middleware to verify token
 	// r.Use(func(c *gin.Context) {
@@ -43,6 +43,7 @@ func main() {
 	routes.BookRoutes(r)
 	routes.UserRoutes(r)
 	routes.ThaidataRoutes(r)
+	routes.CheckboxRoutes(r)
 
 	port := "8080"
 	log.Printf("Server is running at http://localhost:%s\n", port)

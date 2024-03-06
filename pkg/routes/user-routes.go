@@ -10,11 +10,9 @@ var UserRoutes = func(router *gin.Engine) {
 	api := router.Group("/api/user")
 	api.Use(verifyToken)
 	{
-		api.GET("/", controllers.GetUser,)
+		api.GET("/", controllers.GetUser)
 		api.GET("/:userId", controllers.GetUserById)
-		// api.GET("/:email", controllers.GetUserByEmail)
 		api.PUT("/:userId", controllers.UpdateUser)
 		api.DELETE("/:userId", controllers.DeleteUser)
 	}
-
 }

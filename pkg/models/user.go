@@ -19,11 +19,11 @@ type User struct {
 	Googleid         string `json:"googleid"`
 	Email            string `json:"email"`
 	Profile          string `json:"profile"`
+	Role             string `json:"role"`
 	Province         string `json:"province"`
 	Amphure          string `json:"amphure"`
 	Tambon           string `json:"tambon"`
 	Zipcode          string `json:"zipcode"`
-	Role             string `json:"role"`
 }
 
 func init() {
