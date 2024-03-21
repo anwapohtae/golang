@@ -44,6 +44,7 @@ func main() {
 	routes.UserRoutes(r)
 	routes.ThaidataRoutes(r)
 	routes.CheckboxRoutes(r)
+	routes.RachkarnRoutes(r)
 
 	port := "8080"
 	log.Printf("Server is running at http://localhost:%s\n", port)
